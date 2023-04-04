@@ -18,7 +18,7 @@ This README.md file contains in it's first commit all the necessary steps I took
 
 ## How does it look like?
 Like this:
-[wordnet.princeton.edu Knowledge Graph](wordnet_princeton_knowledge_graph.jpg)
+![wordnet.princeton.edu Knowledge Graph](wordnet_princeton_knowledge_graph.jpg)
 
 ## The Story
 
