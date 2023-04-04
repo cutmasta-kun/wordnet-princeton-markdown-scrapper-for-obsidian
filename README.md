@@ -11,10 +11,14 @@
 
 I found out about KnowledgeGraphs and Knowledge Bases because of obsidian.md.
 This concept fascinates me and I tried to get my hands on some kind of public knowledge base.
-I figured out, when I use the data from (WordNet Princton)[https://wordnet.princeton.edu/] as my base, I could format the data until I have my desired format, mainly obsidian.md friendly.
+I figured out, when I use the data from [WordNet Princton](https://wordnet.princeton.edu/) as my base, I could format the data until I have my desired format, mainly obsidian.md friendly.
 This means, that links are represented by `[[ Link to Titel ]]` and multiple links can lead to the same titel by `[[ Other Link to Titel | Link to Titel ]]`.
 
 This README.md file contains in it's first commit all the necessary steps I took, to finish this application.
+
+## How does it look like?
+Like this:
+[wordnet.princeton.edu Knowledge Graph](wordnet_princeton_knowledge_graph.jpg)
 
 ## The Story
 
