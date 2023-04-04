@@ -147,7 +147,11 @@ python wordnet_to_markdown.py
 ```
 Dieses Skript generiert Markdown-Date[...connection lost]
 
-[I downloaded python3 and pip3, ran python, using the python command line I pasted the first python script provided by Helper-Chan and created a file `wordnet_to_markdown.py` in which I pasted the contend of the last python script. I ran `python3 wordnet_to_markdown.py` but I got an error. Still this script created a folder `/wordnet_-_markdown` and started saving .md files. Now I needed to get rid of the Error]
+---
+
+[I downloaded python3 and pip3, ran python using the python command line, pasted the first python script provided by Helper-Chan and afterwards created a file `wordnet_to_markdown.py` in which I pasted the contend of the last python script. I ran `python3 wordnet_to_markdown.py` but I got an error. Still this script created a folder `/wordnet_-_markdown` and started saving .md files. Now I needed to get rid of the Error]
+
+---
 
 [ Cutmasta-Kun ]
 
@@ -283,6 +287,8 @@ for synset in synsets:
             f.write("\n")
 ```
 Dieser Code verwendet nun die [[Titel]]-Syntax für die Verknüpfungen und sollte mit Obsidian kompatibel sein. Um den alternativen Titel zu verwenden, können Sie den Code einfach anpassen und [[Titel | Ähnlicher Titel]] verwenden, wo immer Sie möchten, dass ein alternativer Titel angezeigt wird.f
+
+---
 
 [At this point it seemed to be working and I'm trying to get 100.000 Files from my wsl2 instance into my windows folder system, so that obsidian.md can access it. If this doesn't work, I'll try to get obsidian.md in ubuntu running and start it from there 🤔]
 
