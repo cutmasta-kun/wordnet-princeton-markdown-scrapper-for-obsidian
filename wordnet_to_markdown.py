@@ -10,11 +10,18 @@ synsets = list(wn.all_synsets())
 
 for synset in synsets:
     sanitized_name = synset.name().replace("/", "_")
-    filename = f"{output_directory}/{sanitized_name}.md"
-    with open(filename, "w", encoding="utf-8") as f:
+    simple_name = sanitized_name.split(".")[0]
+    filename = f"{output_directory}/{simple_name}.md"
+
+    # Prüfen, ob die Datei bereits existiert, und erstellen Sie sie, wenn sie nicht vorhanden ist
+    if not os.path.exists(filename):
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("")
+
+    with open(filename, "a", encoding="utf-8") as f:
         # Schreiben Sie die Überschrift (Synset-ID und Wortart)
         f.write(f"# {sanitized_name} ({synset.pos()})\n\n")
-        
+
         # Schreiben Sie die Definition
         f.write(f"**Definition:** {synset.definition()}\n\n")
 
@@ -37,7 +44,8 @@ for synset in synsets:
             f.write("**Hypernyms:**\n\n")
             for hypernym in hypernyms:
                 sanitized_hypernym_name = hypernym.name().replace("/", "_")
-                f.write(f"- [[{sanitized_hypernym_name}]]\n")
+                simple_hypernym_name = sanitized_hypernym_name.split(".")[0]
+                f.write(f"- [[{simple_hypernym_name}]]\n")
             f.write("\n")
 
         # Schreiben Sie die Hyponym-Beziehungen (Unterbegriffe)
@@ -46,5 +54,9 @@ for synset in synsets:
             f.write("**Hyponyms:**\n\n")
             for hyponym in hyponyms:
                 sanitized_hyponym_name = hyponym.name().replace("/", "_")
-                f.write(f"- [[{sanitized_hyponym_name}]]\n")
+                simple_hyponym_name = sanitized_hyponym_name.split(".")[0]
+                f.write(f"- [[{simple_hyponym_name}]]\n")
             f.write("\n")
+
+        # Fügen Sie eine Trennlinie hinzu, um die verschiedenen Bedeutungen voneinander zu trennen
+        f.write("---\n\n")

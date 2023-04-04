@@ -21,6 +21,13 @@ This README.md file contains in it's first commit all the necessary steps I took
 Like this:
 ![wordnet.princeton.edu Knowledge Graph](wordnet_princeton_knowledge_graph.jpg)
 
+## The Regret <(＿　＿)>
+Ok, after revising the story, i figured out that I don't actually use the [WordNet Princton](https://wordnet.princeton.edu/), as I thought.
+It seems, that `nltk` can download `wordnet`, which is kind of a lexica (lexicons, lexiconos, lexicara).
+So the Image of the Knowledge Graph above is just a "simple" lexica. Still, very impressive so far ^^
+I wanna see if I can add the "princeton" wordnet data into the semantic network.
+But before that I found out, that the naming of the markdown files is kinda 'whacky' so, first fix that and then adding the princeton knowledge to the mix. Brrrrrrrrrrr 🔥🔥🔥
+
 ## The Story
 
 [ Cutmasta-Kun ]
@@ -139,7 +146,6 @@ for synset in synsets:
             for hyponym in hyponyms:
                 f.write(f"- [{hyponym.name()}]({hyponym.name()}.md)\n")
             f.write("\n")
-
 ```
 5. Führen Sie das Skript aus, indem Sie das Terminal (oder die Eingabeaufforderung unter Windows) öffnen und den folgenden Befehl eingeben:
 ``` bash
@@ -218,7 +224,6 @@ for synset in synsets:
                 sanitized_hyponym_name = hyponym.name().replace("/", "_")
                 f.write(f"- [{sanitized_hyponym_name}]({sanitized_hyponym_name}.md)\n")
             f.write("\n")
-
 ```
 
 Führen Sie das aktualisierte Skript aus, und es sollte ohne Fehler funktionieren.
@@ -296,3 +301,169 @@ Dieser Code verwendet nun die [[Titel]]-Syntax für die Verknüpfungen und sollt
 This took AAAAAAAAAAAAGES (while I was waiting, continued the video ["Donald Hoffman: Reality is an Illusion - How Evolution Hid the Truth | Lex Fridman Podcast"](https://www.youtube.com/watch?v=reYdQYZ9Rj4)).
 But it did work! only 2 files were not possible to copy, but I can look into that later. Concidering, that I have now ~117.000 .md files, waiting to be analyzed!
 At the Moment, I opened the folder as a vault in obsidian and am waiting for obsidian.md to index all the files in the vault. Afterwards, let's take a look on the KnowledgeGraph ♥ ]
+
+[After I looked ca. 50 times over this repo, I figured more stuff out. I'm gonna continue the Story and see where it leads me....]
+
+---
+
+[ Cutmasta-Kun ]
+
+Das hat super geklappt! Die Daten können ordentlich von Obsidian.md gelesen werden und ich kann tatsächlich ein semantisches Netzwerk damit darstellen!
+Mir ist allerdings aufgefallen, dass die Namen der Markdown Dateien etwas seltsam sind, zum Beispiel "dudeen.n.01.md", "egg_timer.n.01.md", "net.n.06.md" oder "valuation.n.02.md".
+Könnten wir die Namen nicht schöner haben, indem die ".n.01.md" ersetzt werden mit nur ".md"?
+Dementsprechend können auch die Titel innerhalb der Markdown Dateien auf diesen seltsamen Suffix verzichten ^^
+
+[ Helper-Chan ]
+
+Natürlich können wir das ändern! Hier ist der aktualisierte Code, der die Dateinamen und Titel ohne den Suffix .n.01 erstellt:
+
+``` python
+import os
+from nltk.corpus import wordnet as wn
+
+output_directory = "wordnet_markdown"
+
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+
+synsets = list(wn.all_synsets())
+
+for synset in synsets:
+    sanitized_name = synset.name().replace("/", "_")
+    simple_name = sanitized_name.split(".")[0]
+    filename = f"{output_directory}/{simple_name}.md"
+    with open(filename, "w", encoding="utf-8") as f:
+        # Schreiben Sie die Überschrift (Synset-ID und Wortart)
+        f.write(f"# {simple_name} ({synset.pos()})\n\n")
+        
+        # Schreiben Sie die Definition
+        f.write(f"**Definition:** {synset.definition()}\n\n")
+
+        # Schreiben Sie die Beispiele (falls vorhanden)
+        if synset.examples():
+            f.write("**Examples:**\n\n")
+            for example in synset.examples():
+                f.write(f"- {example}\n")
+            f.write("\n")
+
+        # Schreiben Sie die Synonyme (Lemmata)
+        f.write("**Synonyms:**\n\n")
+        for lemma in synset.lemmas():
+            f.write(f"- {lemma.name()}\n")
+        f.write("\n")
+
+        # Schreiben Sie die Hypernym-Beziehungen (Oberbegriffe)
+        hypernyms = synset.hypernyms()
+        if hypernyms:
+            f.write("**Hypernyms:**\n\n")
+            for hypernym in hypernyms:
+                sanitized_hypernym_name = hypernym.name().replace("/", "_")
+                simple_hypernym_name = sanitized_hypernym_name.split(".")[0]
+                f.write(f"- [[{simple_hypernym_name}]]\n")
+            f.write("\n")
+
+        # Schreiben Sie die Hyponym-Beziehungen (Unterbegriffe)
+        hyponyms = synset.hyponyms()
+        if hyponyms:
+            f.write("**Hyponyms:**\n\n")
+            for hyponym in hyponyms:
+                sanitized_hyponym_name = hyponym.name().replace("/", "_")
+                simple_hyponym_name = sanitized_hyponym_name.split(".")[0]
+                f.write(f"- [[{simple_hyponym_name}]]\n")
+            f.write("\n")
+```
+
+Dieser aktualisierte Code entfernt den Suffix .n.01 sowohl aus den Dateinamen als auch aus den Titeln innerhalb der Markdown-Dateien.
+
+
+---
+[ Here I tried the new version of the script but I realized, that instead of generating ~117.000 Markdown Files, it only generates ~86.000 Markdown files. Let's sidetrack into this rabbit-hole for a little bit ]
+
+---
+
+[ Cutmasta-Kun ]
+
+Kann es wirklich sein, dass diese Änderungen des Skripts dafür sorgen, dass statt ca. 117000 Markdown Dateien jetzt nur noch ca. 86000 erstellt werden?
+
+[ Helper-Chan ]
+
+Ja, das ist möglich. Wenn wir den Suffix .n.01 aus den Dateinamen entfernen und nur den ersten Teil des Synset-Namens verwenden, führt das dazu, dass Synsets mit demselben Lemma (Wort), aber unterschiedlichen Bedeutungen (durch unterschiedliche Suffixe wie .n.01, .n.02 usw. gekennzeichnet) überschrieben werden. Das Ergebnis ist, dass weniger Dateien erstellt werden, aber einige Informationen verloren gehen, weil verschiedene Bedeutungen eines Wortes in einer einzigen Datei zusammengefasst werden.
+
+Wenn Sie alle Bedeutungen jedes Wortes in getrennten Dateien behalten möchten, sollten Sie den ursprünglichen Code beibehalten, der den Suffix im Dateinamen und Titel beibehält. Andernfalls müssen Sie akzeptieren, dass einige Informationen verloren gehen, wenn Sie den Suffix entfernen und weniger Dateien erstellen.
+
+[ Cutmasta-Kun ]
+
+Verstehe ich das richtig, die Dateien würden überschrieben werden? könnte man nicht stattdessen den Inhalt jeweils an das vorherige ranhängen und somit die Datei vergrößern, statt sie zu überschreiben?
+
+Ja, das ist richtig. Um den Inhalt der neuen Bedeutungen an eine vorhandene Datei anzuhängen, anstatt sie zu überschreiben, können Sie den folgenden Code verwenden:
+
+``` python
+import os
+from nltk.corpus import wordnet as wn
+
+output_directory = "wordnet_markdown"
+
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+
+synsets = list(wn.all_synsets())
+
+for synset in synsets:
+    sanitized_name = synset.name().replace("/", "_")
+    simple_name = sanitized_name.split(".")[0]
+    filename = f"{output_directory}/{simple_name}.md"
+
+    # Prüfen, ob die Datei bereits existiert, und erstellen Sie sie, wenn sie nicht vorhanden ist
+    if not os.path.exists(filename):
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("")
+
+    with open(filename, "a", encoding="utf-8") as f:
+        # Schreiben Sie die Überschrift (Synset-ID und Wortart)
+        f.write(f"# {sanitized_name} ({synset.pos()})\n\n")
+
+        # Schreiben Sie die Definition
+        f.write(f"**Definition:** {synset.definition()}\n\n")
+
+        # Schreiben Sie die Beispiele (falls vorhanden)
+        if synset.examples():
+            f.write("**Examples:**\n\n")
+            for example in synset.examples():
+                f.write(f"- {example}\n")
+            f.write("\n")
+
+        # Schreiben Sie die Synonyme (Lemmata)
+        f.write("**Synonyms:**\n\n")
+        for lemma in synset.lemmas():
+            f.write(f"- {lemma.name()}\n")
+        f.write("\n")
+
+        # Schreiben Sie die Hypernym-Beziehungen (Oberbegriffe)
+        hypernyms = synset.hypernyms()
+        if hypernyms:
+            f.write("**Hypernyms:**\n\n")
+            for hypernym in hypernyms:
+                sanitized_hypernym_name = hypernym.name().replace("/", "_")
+                simple_hypernym_name = sanitized_hypernym_name.split(".")[0]
+                f.write(f"- [[{simple_hypernym_name}]]\n")
+            f.write("\n")
+
+        # Schreiben Sie die Hyponym-Beziehungen (Unterbegriffe)
+        hyponyms = synset.hyponyms()
+        if hyponyms:
+            f.write("**Hyponyms:**\n\n")
+            for hyponym in hyponyms:
+                sanitized_hyponym_name = hyponym.name().replace("/", "_")
+                simple_hyponym_name = sanitized_hyponym_name.split(".")[0]
+                f.write(f"- [[{simple_hyponym_name}]]\n")
+            f.write("\n")
+
+        # Fügen Sie eine Trennlinie hinzu, um die verschiedenen Bedeutungen voneinander zu trennen
+        f.write("---\n\n")
+```
+
+Dieser Code erstellt die Datei, wenn sie noch nicht existiert, und fügt den Inhalt der verschiedenen Bedeutungen an die vorhandene Datei an, anstatt sie zu überschreiben. Zwischen den Bedeutungen wird eine horizontale Trennlinie (---) hinzugefügt, um sie voneinander abzugrenzen.
+
+---
+
+[At this point the new Set of Markdown files looked way cleaner. I'm now copying them into my windows partition, so that I can have Obsidian.md take a look over it ☺]
