@@ -15,7 +15,7 @@ This concept fascinates me and I tried to get my hands on some kind of public kn
 I figured out, when I use the data from [WordNet Princton](https://wordnet.princeton.edu/) as my base, I could format the data until I have my desired format, mainly obsidian.md friendly.
 This means, that links are represented by `[[ Link to Titel ]]` and multiple links can lead to the same titel by `[[ Other Link to Titel | Link to Titel ]]`.
 
-This README.md file contains this story and all the necessary steps It took, to create a KnowledgeGraph with data from extern sources.
+This README.md file contains this story and all the necessary steps It took, to create a KnowledgeGraph with data from external sources.
 
 ## How does it look like?
 Like this:
