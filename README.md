@@ -1,3 +1,4 @@
+![banner](banner.jpg)
 # WordNet Princeton Education Scrapper to convert everything they have into .md files which can be read by obsidian.md
 
 ## TLDR;
