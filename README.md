@@ -395,6 +395,8 @@ Wenn Sie alle Bedeutungen jedes Wortes in getrennten Dateien behalten möchten, 
 
 Verstehe ich das richtig, die Dateien würden überschrieben werden? könnte man nicht stattdessen den Inhalt jeweils an das vorherige ranhängen und somit die Datei vergrößern, statt sie zu überschreiben?
 
+[ Helper-Chan ]
+
 Ja, das ist richtig. Um den Inhalt der neuen Bedeutungen an eine vorhandene Datei anzuhängen, anstatt sie zu überschreiben, können Sie den folgenden Code verwenden:
 
 ``` python
