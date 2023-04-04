@@ -1,5 +1,12 @@
 # WordNet Princeton Education Scrapper to convert everything they have into .md files which can be read by obsidian.md
 
+## TLDR;
+- clone repo
+- cd inside repo
+- run `python init.py`
+- run `wordnet_to_markdown.py`
+- look inside new folder `/wordnet_markdown`
+
 ## What have I done?
 
 I found out about KnowledgeGraphs and Knowledge Bases because of obsidian.md.
