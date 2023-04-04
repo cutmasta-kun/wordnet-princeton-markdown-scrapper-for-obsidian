@@ -18,8 +18,12 @@ This means, that links are represented by `[[ Link to Titel ]]` and multiple lin
 This README.md file contains this story and all the necessary steps It took, to create a KnowledgeGraph with data from external sources.
 
 ## How does it look like?
-Like this:
+### Like this:
 ![wordnet.princeton.edu Knowledge Graph](wordnet_princeton_knowledge_graph.jpg)
+
+### And also like this (v2)
+![wordnet knowledge base v2](wordnet_knowledge_base_v2.jpg)
+
 
 ## The Regret <(＿　＿)>
 Ok, after revising the story, i figured out that I don't actually use the [WordNet Princton](https://wordnet.princeton.edu/), as I thought.
@@ -469,3 +473,7 @@ Dieser Code erstellt die Datei, wenn sie noch nicht existiert, und fügt den Inh
 ---
 
 [At this point the new Set of Markdown files looked way cleaner. I'm now copying them into my windows partition, so that I can have Obsidian.md take a look over it ☺]
+
+---
+
+[The indexing is done and the graph view is beautiful <3. Gonna add it at the beginning to see kind of a "Roadmap". Next I need to figure out how to add additional Data to the semantic network... Maybe creating a python script, which can parse .doc files or .pdf files and generate Markdown Files...]
